@@ -9,14 +9,14 @@ return new class extends Migration {
     {
         Schema::create('taxis', function (Blueprint $table) {
             $table->id();
-            $table->string('numero_economico');
-            $table->string('placa');
             $table->string('titular');
-            $table->string('tipo'); // Sedan, SUV, etc.
-            $table->string('marca');
-            $table->string('modelo');
-            $table->integer('anio');
             $table->string('telefono');
+            $table->string('eco');
+            $table->string('placa');
+            $table->string('serie');
+            $table->integer('anio');
+            $table->string('verificacion');
+            $table->string('tipo'); // Sedan, SUV, etc.
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -49,6 +50,20 @@ class AuthController extends Controller
         return response()->json(['token' => $token, 'user' => $user]);
     }
 
+    public function client(Request $request)
+    {
+        $client = Auth::user(); // Obtiene el usuario autenticado
+
+        if (!$client) {
+            return response()->json(['error' => 'No autorizado'], 401);
+        }
+
+        return response()->json([
+            'id' => $client->id,
+            'name' => $client->name,
+            'email' => $client->email,
+        ]);
+    }
     // Cierre de sesión
     public function logout(Request $request)
     {

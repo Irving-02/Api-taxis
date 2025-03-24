@@ -10,13 +10,13 @@ class Taxi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'numero_economico',
-        'placa',
         'titular',
-        'tipo',
-        'marca',
-        'modelo',
-        'anio',
         'telefono',
+        'eco',
+        'placa',
+        'serie',
+        'anio',
+        'verficacion',
+        'tipo',
     ];
 }

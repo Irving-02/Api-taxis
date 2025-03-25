@@ -14,6 +14,7 @@ class TaxiController extends Controller
 
     public function store(Request $request)
     {
+        // Crear una nueva instancia de Taxi y asignar los valores
         $taxi = new Taxi();
         $taxi->titular = $request->titular;
         $taxi->telefono = $request->telefono;
@@ -23,12 +24,18 @@ class TaxiController extends Controller
         $taxi->anio = $request->anio;
         $taxi->verificacion = $request->verificacion;
         $taxi->tipo = $request->tipo;
+
+        // Guardar el taxi en la base de datos
         $taxi->save();
 
-        // dd($taxi);
-
-        return response()->json($taxi, 201);
+        // Devolver el objeto taxi guardado como respuesta JSON
+        // Esto incluirá el ID generado y cualquier otro atributo
+        return response()->json([
+            'message' => 'Taxi agregado exitosamente',
+            'taxi' => $taxi,
+        ], 201);
     }
+
 
     public function show($id)
     {
@@ -68,5 +75,29 @@ class TaxiController extends Controller
         $taxi->delete();
 
         return response()->json(['message' => 'Taxi eliminado correctamente'], 200);
+    }
+
+    public function countTaxis()
+    {
+        $count = Taxi::count();
+        return response()->json(['total' => $count], 200);
+    }
+
+    public function countTolerados()
+    {
+        $count = Taxi::where('tipo', 'Tolerado')->count();
+        return response()->json(['total' => $count], 200);
+    }
+
+    public function countEspeciales()
+    {
+        $count = Taxi::where('tipo', 'Taxi')->count();
+        return response()->json(['total' => $count], 200);
+    }
+
+    public function countVerificados()
+    {
+        $count = Taxi::where('verificacion', 'Si')->count();
+        return response()->json(['total' => $count], 200);
     }
 }

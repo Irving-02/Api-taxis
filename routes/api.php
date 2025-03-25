@@ -29,4 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/taxis/{id}', [TaxiController::class, 'show']);
     Route::put('/{id}', [TaxiController::class, 'update']);
     Route::delete('/{id}', [TaxiController::class, 'destroy']);
+    Route::get('/total_carros', [TaxiController::class, 'countTaxis']);
+    Route::get('/total_taxis', [TaxiController::class, 'countEspeciales']);
+    Route::get('/total_tolerados', [TaxiController::class, 'countTolerados']);
+    Route::get('/total_verificados', [TaxiController::class, 'countVerificados']);
 });

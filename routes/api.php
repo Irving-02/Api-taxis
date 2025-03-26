@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CobroController;
+use App\Http\Controllers\EstadoDeCuentaController;
+use App\Http\Controllers\GastoController;
 use App\Http\Controllers\TaxiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +36,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/total_taxis', [TaxiController::class, 'countEspeciales']);
     Route::get('/total_tolerados', [TaxiController::class, 'countTolerados']);
     Route::get('/total_verificados', [TaxiController::class, 'countVerificados']);
+    Route::apiResource('cobros', CobroController::class);
+    Route::apiResource('gastos', GastoController::class);
+
+    Route::apiResource('estado-de-cuenta', EstadoDeCuentaController::class);
+
 });

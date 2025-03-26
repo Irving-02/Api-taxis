@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/total_taxis', [TaxiController::class, 'countEspeciales']);
     Route::get('/total_tolerados', [TaxiController::class, 'countTolerados']);
     Route::get('/total_verificados', [TaxiController::class, 'countVerificados']);
-    Route::apiResource('cobros', CobroController::class);
+    Route::apiResource('pagos', CobroController::class);
     Route::apiResource('gastos', GastoController::class);
 
     Route::apiResource('estado-de-cuenta', EstadoDeCuentaController::class);

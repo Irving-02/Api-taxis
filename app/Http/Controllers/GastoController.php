@@ -7,7 +7,7 @@ use App\Models\Gasto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\S3Helper;
-
+use Carbon\Carbon;
 class GastoController extends Controller
 {
     /**
@@ -58,7 +58,24 @@ class GastoController extends Controller
      */
     public function index()
     {
-        $gastos = Gasto::all();
+        $gastos = Gasto::orderBy('id', 'desc')->get();
         return response()->json($gastos);
+    }
+
+    public function SumaGastosSemanal()
+    {
+        $sumaGastosSemanal = Gasto::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()])
+            ->whereNull('deleted_at')
+            ->sum('monto');
+
+        return response()->json(['total' => $sumaGastosSemanal]);
+    }
+    public function SumaGastosMensual()
+    {
+        $sumaGastosMensual = Gasto::whereBetween('created_at', [Carbon::now()->startOfMonth(), Carbon::now()])
+            ->whereNull('deleted_at')
+            ->sum('monto');
+
+        return response()->json(['total' => $sumaGastosMensual]);
     }
 }

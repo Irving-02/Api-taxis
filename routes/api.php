@@ -38,7 +38,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/total_verificados', [TaxiController::class, 'countVerificados']);
     Route::apiResource('pagos', CobroController::class);
     Route::apiResource('gastos', GastoController::class);
-
     Route::apiResource('estado-de-cuenta', EstadoDeCuentaController::class);
-
+    Route::get('/gasto-semanal', [GastoController::class, 'SumaGastosSemanal']);
+    Route::get('/gasto-mesual', [GastoController::class, 'SumaGastosMensual']);
+    Route::get('/ingreso-semanal', [CobroController::class, 'SumaIngresosSemanal']);
+    Route::get('/ingreso-mesual', [CobroController::class, 'SumaIngresosMensual']);
+    Route::get('/grafica-mensual', [CobroController::class, 'IngresosMensuales']);
 });
